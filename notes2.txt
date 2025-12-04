@@ -1,0 +1,860 @@
+✅ 3. Develop a Java user-interactive containerized app (calculator)
+Java file (Calculator.java)
+import java.util.*;
+public class Calculator {
+  public static void main(String[] args) {
+    Scanner s = new Scanner(System.in);
+    int a = s.nextInt();
+    int b = s.nextInt();
+    System.out.println("Sum = " + (a+b));
+  }
+}
+Dockerfile
+FROM openjdk:17
+COPY Calculator.java .
+RUN javac Calculator.java
+CMD ["java", "Calculator"]
+Run
+docker build -t calc .
+docker run -it calc
+________________________________________
+✅ 4. Simple Python containerized app (number guessing)
+Python file (game.py)
+import random
+n = random.randint(1,5)
+guess = int(input("Guess number 1–5: "))
+print("Correct!" if guess == n else "Wrong!")
+Dockerfile
+FROM python:3.10
+COPY game.py .
+CMD ["python", "game.py"]
+Run
+docker build -t guess .
+docker run -it guess
+________________________________________
+✅ 5. Build a containerized version of an application using a Dockerfile
+Dockerfile
+FROM python:3.10
+COPY app.py .
+CMD ["python", "app.py"]
+Command
+docker build -t myapp .
+docker run myapp
+________________________________________
+✅ 6. Installation steps for Docker + basic commands
+Installation Steps
+1.	Go to https://www.docker.com
+2.	Download Docker Desktop
+3.	Install like normal software
+4.	Open Docker Desktop → ensure “Docker Engine Running”
+Basic Commands
+docker --version
+docker pull nginx
+docker images
+docker run nginx
+docker ps
+docker stop <id>
+docker rm <id>
+docker rmi <image>
+docker logs <id>
+docker exec -it <id> sh
+________________________________________
+✅ 7. Automate deployment using Kubernetes Deployment + Service
+deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: nginx
+        ports:
+        - containerPort: 80
+service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: myservice
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      nodePort: 30007
+  selector:
+    app: myapp
+Apply:
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+________________________________________
+✅ 8. Steps to integrate Kubernetes with Docker + basic kubectl commands
+Steps:
+1.	Install Docker Desktop
+2.	Enable Kubernetes in Docker Desktop → Settings → Kubernetes → Enable
+3.	Wait for cluster to start
+4.	Verify:
+kubectl cluster-info
+kubectl get nodes
+Basic kubectl commands:
+kubectl get pods
+kubectl get deployments
+kubectl get svc
+kubectl describe pod <name>
+kubectl logs <pod>
+kubectl delete pod <name>
+kubectl apply -f file.yaml
+kubectl expose deployment myapp --type=NodePort --port=80
+
+
+   1. Java Selenium script to test Google and MGIT websites 
+➡ Simple Java Selenium Code 
+import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.chrome.ChromeDriver; 
+ 
+public class TestSites { 
+    public static void main(String[] args) { 
+ 
+        WebDriver driver = new ChromeDriver(); 
+ 
+        // Test Google 
+        driver.get("https://www.google.com"); 
+        System.out.println("Opened Google"); 
+ 
+        // Test MGIT 
+        driver.get("https://www.mgit.ac.in"); 
+        System.out.println("Opened MGIT"); 
+ 
+        driver.quit(); 
+    } 
+} 
+Just run this .java file — it opens both websites. 
+ 
+   2. Installation steps for Selenium + Node.js script 
+➡ Installation steps (super simple) 
+   Install Node.js 
+https://nodejs.org 
+   Create a project 
+mkdir selenium-test 
+cd selenium-test 
+npm init -y 
+Install Selenium WebDriver 
+npm install selenium-webdriver 
+Install ChromeDriver (automatic) 
+npm install chromedriver 
+➡ Simple Node.js Selenium script 
+Create test.js: 
+const { Builder } = require("selenium-webdriver"); 
+async function testSite() { 
+let driver = await new Builder().forBrowser("chrome").build(); 
+await driver.get("https://www.google.com"); 
+console.log("Google open"); 
+await driver.quit(); 
+} 
+testSite(); 
+Run with: 
+node test.js 
+3. Selenium test cases for your containerized web app 
+Assume your Docker app runs at: 
+http://localhost:8080 
+➡ Simple Selenium Java Test Cases 
+import org.openqa.selenium.By; 
+import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.chrome.ChromeDriver; 
+public class AppTests { 
+    public static void main(String[] args) { 
+        WebDriver driver = new ChromeDriver(); 
+ 
+        // Open your Docker app 
+        driver.get("http://localhost:8080"); 
+ 
+        // Test: Page title exists 
+        System.out.println("Title: " + driver.getTitle()); 
+ 
+        // Test: A button or text exists (example) 
+        driver.findElement(By.tagName("h1")); 
+ 
+        driver.quit(); 
+    } 
+} 
+Change URL & selectors based on your actual HTML. 
+ 
+   4. JavaScript calculator + Selenium testing 
+➡ Very simple calculator (calculator.html) 
+<!DOCTYPE html> 
+<html> 
+<body> 
+ 
+<input id="a">  
+<select id="op"> 
+  <option value="+">+</option> 
+  <option value="-">-</option> 
+  <option value="*">*</option> 
+  <option value="/">/</option> 
+</select> 
+<input id="b"> 
+<button onclick="calc()">=</button> 
+<span id="result"></span> 
+<script> 
+function calc() { 
+const a = Number(document.getElementById("a").value); 
+const b = Number(document.getElementById("b").value); 
+const op = document.getElementById("op").value; 
+let res = 0; 
+if (op === "+") res = a + b; 
+if (op === "-") res = a - b; 
+if (op === "*") res = a * b; 
+if (op === "/") res = b !== 0 ? a / b : "Error"; 
+document.getElementById("result").textContent = res; 
+} 
+</script> 
+</body> 
+</html>
+ ➡ Selenium test (Node.js) 
+const { Builder, By } = require("selenium-webdriver"); 
+async function testCalc() { 
+let driver = await new Builder().forBrowser("chrome").build(); 
+await driver.get("file://" + __dirname + "/calculator.html"); 
+// enter numbers 
+await driver.findElement(By.id("a")).sendKeys("10"); 
+await driver.findElement(By.id("b")).sendKeys("2"); 
+// choose operator (e.g., multiply *) 
+await driver.findElement(By.id("op")).sendKeys("*"); 
+// press equals 
+await driver.findElement(By.tagName("button")).click(); 
+// get result 
+let result = await driver.findElement(By.id("result")).getText(); 
+console.log("Result =", result); 
+await driver.quit(); 
+} 
+testCalc();
+ 1. Jenkins Freestyle Job with String Parameter 
+Goal: When you build the job, it should ask for a name and print: 
+Hello STUDENT_NAME, Welcome to Jenkins! 
+Step-by-step answer: 
+(1) Create a new Freestyle Job 
+• Go to Jenkins → New Item 
+• Select Freestyle project 
+• Name: Welcome-Job 
+(2) Add a String Parameter 
+Go to: 
+Configure → This project is parameterized → Add Parameter → String Parameter 
+• Name: STUDENT_NAME 
+• Default Value: YourName 
+ 
+(3) Add a Build Step → Execute Shell 
+Add this script: 
+echo "Hello $STUDENT_NAME, Welcome to Jenkins!" 
+ 
+(4) Save and Build with Parameters 
+Enter your name → Output will be: 
+Hello Akshayapriya, Welcome to Jenkins! 
+✔ DONE 
+Simple and perfect for labs. 
+ 
+   2. Jenkins Pipeline with Build → Test → Deploy stages 
+Your Jenkinsfile (Pipeline Script) is extremely simple: 
+Pipeline Script: 
+pipeline { 
+    agent any 
+ 
+    stages { 
+        stage('Build') { 
+            steps { 
+                echo "Build Stage" 
+            } 
+        } 
+        stage('Test') { 
+            steps { 
+                echo "Test Stage" 
+            } 
+        } 
+        stage('Deploy') { 
+            steps { 
+                echo "Deploy Stage" 
+            } 
+        } 
+    } 
+} 
+Running this pipeline prints: 
+Build Stage 
+Test Stage 
+Deploy Stage 
+✔ Super clean 
+✔ Exactly what exam/lab expects 
+ 
+   3. Jenkins job that runs every 2 minutes and prints system date/time 
+Freestyle Job or Pipeline? 
+You can use either. 
+I'll give both versions. 
+ 
+Option A: Freestyle Job 
+Go to: 
+Configure → Build Triggers → Build periodically 
+Enter: 
+H/2 * * * * 
+This means: run every 2 minutes. 
+ 
+Add Execute Shell step: 
+date 
+ 
+Option B: Pipeline Version 
+pipeline { 
+    agent any 
+ 
+    triggers { 
+        cron('H/2 * * * *') 
+    } 
+ 
+    stages { 
+        stage('Show Date') { 
+            steps { 
+                sh 'date' 
+            } 
+        } 
+    } 
+} 
+ 
+ 
+   Deploy a Docker-built image using Kubernetes (Simplest Lab Answer) 
+We will use the Docker Hub image: 
+nginx:latest 
+(This counts as a Docker-built image.) 
+ 
+  Step 1: Create a Deployment 
+Create a file named: 
+deployment.yaml 
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: nginx-deployment 
+spec: 
+  replicas: 1 
+  selector: 
+    matchLabels: 
+      app: nginx 
+  template: 
+    metadata: 
+      labels: 
+        app: nginx 
+    spec: 
+      containers: 
+      - name: nginx 
+        image: nginx:latest 
+        ports: 
+        - containerPort: 80 
+Apply it: 
+kubectl apply -f deployment.yaml 
+ 
+  Step 2: Create a Service 
+Create: 
+service.yaml 
+apiVersion: v1 
+kind: Service 
+metadata: 
+  name: nginx-service 
+spec: 
+  type: NodePort 
+  selector: 
+    app: nginx 
+  ports: 
+    - port: 80 
+      targetPort: 80 
+      nodePort: 30001 
+Apply it: 
+kubectl apply -f service.yaml 
+ 
+Step 3: Access the App 
+If using Minikube: 
+minikube ip 
+Then open: 
+http://<minikube-ip>:30001 
+If using Docker Desktop Kubernetes, use: 
+http://localhost:30001
+
+
+Registration Form
+<!DOCTYPE html> 
+<html> 
+<head> 
+<title>Registration Form</title> 
+<style> 
+body { font-family: Arial; padding: 20px; } 
+form { max-width: 300px; margin: auto; } 
+label { display: block; margin-top: 10px; } 
+input { width: 100%; padding: 6px; margin-top: 4px; } 
+button { margin-top: 12px; padding: 8px; } 
+.error { color: red; font-size: 14px; margin-top: 8px; } 
+</style> 
+</head> 
+<body> 
+<form onsubmit="return check()"> 
+<h3>Register</h3> 
+<label>Username</label> 
+<input type="text" id="u" required> 
+<label>Password</label> 
+<input type="password" id="p" required> 
+<label>Confirm Password</label> 
+<input type="password" id="c" required> 
+<div class="error" id="err"></div> 
+<button type="submit">Create Account</button> 
+</form> 
+<script> 
+function check() { 
+let p = document.getElementById("p").value; 
+let c = document.getElementById("c").value; 
+let err = document.getElementById("err"); 
+if (p !== c) { 
+err.textContent = "Passwords do not match"; 
+return false; 
+} 
+alert("Registration Successful!"); 
+return false; // just for demo 
+} 
+</script> 
+</body> 
+</html> 
+
+
+feedback form
+<!DOCTYPE html> 
+<html> 
+<head> 
+<title>Contact Form</title> 
+<style> 
+body { font-family: Arial, sans-serif; padding: 20px; } 
+form { max-width: 350px; margin: auto; } 
+label { display: block; margin-top: 10px; } 
+input, textarea { width: 100%; padding: 6px; margin-top: 4px; } 
+button { margin-top: 10px; padding: 8px 12px; } 
+</style> 
+</head> 
+<body> 
+ 
+  <h2>Contact Us</h2> 
+  <form onsubmit="alert('Submitted (demo)'); return false;"> 
+    <label>Name</label> 
+    <input type="text" required> 
+ 
+    <label>Email</label> 
+    <input type="email" required> 
+ 
+    <label>Message</label> 
+    <textarea required rows="4"></textarea> 
+ 
+    <button type="submit">Send</button> 
+  </form> 
+ 
+</body> 
+</html> 
+
+Profile
+ 
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <title>Profile Card</title> 
+  <style> 
+    body { font-family: Arial, sans-serif; padding: 20px; } 
+    .card { 
+      width: 250px; 
+      padding: 15px; 
+      border: 1px solid #ccc; 
+      border-radius: 6px; 
+      text-align: center; 
+      margin: auto; 
+    } 
+    img { 
+      width: 100px; 
+      height: 100px; 
+      border-radius: 50%; 
+      margin-bottom: 10px; 
+    } 
+  </style> 
+</head> 
+<body> 
+ 
+  <div class="card"> 
+    <img src="https://via.placeholder.com/100" alt="Profile Photo"> 
+    <h3>Your Name</h3> 
+    <p>Short description about you.</p> 
+  </div> 
+ 
+</body> 
+</html> 
+
+Books
+ 
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <title>My Favorites</title> 
+  <style> 
+    body { font-family: Arial, sans-serif; padding: 20px; } 
+  </style> 
+</head> 
+<body> 
+ 
+  <h2>My Favorite Books</h2> 
+  <ul> 
+    <li>Book 1</li> 
+    <li>Book 2</li> 
+    <li>Book 3</li> 
+  </ul> 
+ 
+  <h2>My Favorite Movies</h2> 
+  <ol> 
+    <li>Movie 1</li> 
+    <li>Movie 2</li> 
+    <li>Movie 3</li> 
+  </ol> 
+ 
+</body> 
+</html> 
+Timetable
+ 
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <title>Weekly Timetable</title> 
+  <style> 
+    table { width: 100%; border-collapse: collapse; } 
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; } 
+    body { font-family: Arial, sans-serif; padding: 20px; } 
+  </style> 
+</head> 
+<body> 
+ 
+  <h2>Weekly Timetable</h2> 
+ 
+  <table> 
+    <tr> 
+      <th>Time</th> 
+      <th>Monday</th> 
+      <th>Tuesday</th> 
+      <th>Wednesday</th> 
+      <th>Thursday</th> 
+      <th>Friday</th> 
+    </tr> 
+    <tr> 
+      <td>9:00 - 10:00</td> 
+      <td>Subject</td> 
+      <td>Subject</td> 
+      <td>Subject</td> 
+      <td>Subject</td> 
+      <td>Subject</td> 
+    </tr> 
+    <tr> 
+      <td>10:00 - 11:00</td> 
+      <td>Subject</td> 
+      <td>Subject</td> 
+      <td>Subject</td> 
+      <td>Subject</td> 
+      <td>Subject</td> 
+    </tr> 
+    <tr> 
+      <td>11:00 - 12:00</td> 
+      <td>Subject</td> 
+      <td>Subject</td> 
+      <td>Subject</td> 
+      <td>Subject</td> 
+      <td>Subject</td> 
+    </tr> 
+    <tr> 
+      <td>2:00 - 3:00</td> 
+      <td>Subject</td> 
+      <td>Subject</td> 
+      <td>Subject</td> 
+      <td>Subject</td> 
+      <td>Subject</td> 
+    </tr> 
+  </table> 
+ 
+</body> 
+</html> 
+
+Resume
+ 
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <title>My Resume</title> 
+  <style> 
+    body { font-family: Arial, sans-serif; padding: 20px; } 
+    h2 { margin-top: 20px; } 
+  </style> 
+</head> 
+<body> 
+ 
+  <h1>Your Name</h1> 
+  <p>Email: yourmail@example.com</p> 
+  <p>Phone: 1234567890</p> 
+ 
+  <h2>Education</h2> 
+  <ul> 
+    <li>B.Tech in Computer Science – XYZ University (2021–2025)</li> 
+    <li>Intermediate – ABC College</li> 
+  </ul> 
+ 
+<h2>Skills</h2> 
+<ul> 
+<li>HTML, CSS, JavaScript</li> 
+<li>Python, Java</li> 
+<li>Git, Docker</li> 
+</ul> 
+<h2>Projects</h2> 
+<ul> 
+<li>Project 1 – Short description</li> 
+<li>Project 2 – Short description</li> 
+<li>Project 3 – Short description</li> 
+</ul> 
+</body> 
+</html> 
+
+Tables and Lists
+<!DOCTYPE html> 
+<html> 
+<head> 
+<title>Tables and Lists</title> 
+<style> 
+body { font-family: Arial, sans-serif; padding: 20px; } 
+table { border-collapse: collapse; width: 300px; } 
+th, td { border: 1px solid #ccc; padding: 6px; text-align: left; } 
+</style> 
+</head> 
+<body> 
+<h2>Sample Table</h2> 
+<table> 
+<tr> 
+      <th>ID</th> 
+      <th>Name</th> 
+    </tr> 
+    <tr> 
+      <td>1</td> 
+      <td>John</td> 
+    </tr> 
+    <tr> 
+      <td>2</td> 
+      <td>Sarah</td> 
+    </tr> 
+  </table> 
+ 
+  <h2>Ordered List</h2> 
+  <ol> 
+    <li>Step One</li> 
+    <li>Step Two</li> 
+    <li>Step Three</li> 
+  </ol> 
+ 
+  <h2>Unordered List</h2> 
+  <ul> 
+    <li>Item A</li> 
+    <li>Item B</li> 
+    <li>Item C</li> 
+  </ul> 
+ 
+</body> 
+</html> 
+ Pizza
+<!DOCTYPE html> 
+<html> 
+<head> 
+<title>Pizza Order Form</title> 
+<style> 
+body { font-family: Arial, sans-serif; padding: 20px; } 
+form { max-width: 350px; } 
+label { display: block; margin-top: 10px; } 
+input, select { width: 100%; padding: 6px; margin-top: 4px; } 
+button { margin-top: 12px; padding: 8px 12px; } 
+</style> 
+</head> 
+<body> 
+<h2>Pizza Order Form</h2> 
+<form onsubmit="alert('Order Placed (demo)'); return false;"> 
+<label>Your Name</label> 
+<input type="text" required> 
+<label>Pizza Size</label> 
+<select> 
+<option>Small</option> 
+<option>Medium</option> 
+<option>Large</option> 
+</select> 
+<label>Toppings</label> 
+<input type="checkbox"> Extra Cheese <br> 
+<input type="checkbox"> Pepperoni <br> 
+<input type="checkbox"> Veggies <br> 
+<label>Address</label> 
+<input type="text" required> 
+<button type="submit">Place Order</button> 
+</form> 
+</body> 
+</html> 
+
+
+1) Git branching story — each branch adds a chapter → merge into final book.html
+Goal: create branches chapter-1, chapter-2, chapter-3 (for example). Each branch adds a chapter file. Merge all chapters into main as book.html.
+Files / example content
+•	chapter1.html
+<h2>Chapter 1 — The Beginning</h2>
+<p>Once upon a time...</p>
+•	chapter2.html
+<h2>Chapter 2 — The Journey</h2>
+<p>The hero set out on a long journey...</p>
+•	chapter3.html
+<h2>Chapter 3 — The End</h2>
+<p>They returned home, wiser and kinder.</p>
+Steps (local Git)
+1.	Create repo (if you already have a repo skip to step 2).
+mkdir branching-story
+cd branching-story
+git init
+2.	Create a README.md and initial commit (optional but recommended).
+echo "# Branching Story" > README.md
+git add README.md
+git commit -m "Initial commit"
+3.	Create branch chapter-1 and add chapter1.
+git checkout -b chapter-1
+cat > chapter1.html <<'EOF'
+<h2>Chapter 1 — The Beginning</h2>
+<p>Once upon a time...</p>
+EOF
+git add chapter1.html
+git commit -m "Add chapter 1"
+4.	Create chapter-2 from main and add chapter2.
+git checkout main        # or git switch main (if git >= 2.23)
+git checkout -b chapter-2
+cat > chapter2.html <<'EOF'
+<h2>Chapter 2 — The Journey</h2>
+<p>The hero set out on a long journey...</p>
+EOF
+git add chapter2.html
+git commit -m "Add chapter 2"
+5.	Create chapter-3.
+git checkout main
+git checkout -b chapter-3
+cat > chapter3.html <<'EOF'
+<h2>Chapter 3 — The End</h2>
+<p>They returned home, wiser and kinder.</p>
+EOF
+git add chapter3.html
+git commit -m "Add chapter 3"
+6.	Merge branches into main (option A: fast/clean local merge)
+git checkout main
+git merge --no-ff chapter-1 -m "Merge chapter-1"
+git merge --no-ff chapter-2 -m "Merge chapter-2"
+git merge --no-ff chapter-3 -m "Merge chapter-3"
+--no-ff keeps each chapter as an obvious merge commit in history (optional).
+7.	Create the final book.html that assembles the chapters. Simple approach: concatenate the files.
+cat chapter1.html chapter2.html chapter3.html > book.html
+git add book.html
+git commit -m "Create combined book.html from chapters"
+8.	Push to GitHub (replace with your origin):
+git remote add origin https://github.com/<your-username>/<repo>.git
+git branch -M main
+git push -u origin main
+# push branches (if you want to keep them remote)
+git push origin chapter-1 chapter-2 chapter-3
+Notes / Alternatives
+•	PR-based workflow: push each branch to GitHub, open a Pull Request for each chapter, then merge on GitHub. This is good if you want reviewers.
+•	If merges cause conflicts: Git will show conflicts. Open the conflicting file, manually edit to resolve, then:
+git add <file>
+git commit
+•	Order control: concatenation order determines the chapter order. If chapters evolve later, update book.html accordingly.
+________________________________________
+2) bio-update branch — add 3 hobbies to a file and push the branch
+Goal: create branch bio-update, modify a bio file (e.g., bio.txt), commit and push.
+Example bio.txt content (before)
+Name: Your Name
+Degree: B.Tech Computer Science
+Steps
+1.	Start from main:
+git checkout main
+2.	Create and switch to bio-update:
+git checkout -b bio-update
+3.	Edit or create bio.txt and add 3 hobbies. Example:
+cat > bio.txt <<'EOF'
+Name: Your Name
+Degree: B.Tech Computer Science
+
+Hobbies:
+- Playing guitar
+- Photography
+- Hiking
+EOF
+4.	Commit and push branch:
+git add bio.txt
+git commit -m "Add 3 hobbies (bio-update)"
+git push -u origin bio-update
+5.	(Optional) Create a Pull Request on GitHub to merge bio-update into main. After review, merge via GitHub UI or merge locally:
+git checkout main
+git pull origin main
+git merge --no-ff bio-update
+git push origin main
+________________________________________
+3) Multi-stage Git branching task — each branch stores part of a secret message → merge into main
+Goal: branches part-1, part-2, part-3 each contain a file with a fragment. After merging all into main, combine fragments into secret_message.txt.
+Example fragments
+•	part1.txt → THE
+•	part2.txt → QUICK
+•	part3.txt → BROWN FOX
+Steps (local)
+1.	Initialize repo (if needed):
+mkdir secret-branches
+cd secret-branches
+git init
+echo "# Secret branches" > README.md
+git add README.md
+git commit -m "Initial commit"
+2.	Create part-1 branch and file:
+git checkout -b part-1
+echo "THE " > part1.txt
+git add part1.txt
+git commit -m "Add part1 fragment"
+git push -u origin part-1
+3.	Create part-2 branch:
+git checkout main
+git checkout -b part-2
+echo "QUICK " > part2.txt
+git add part2.txt
+git commit -m "Add part2 fragment"
+git push -u origin part-2
+4.	Create part-3 branch:
+git checkout main
+git checkout -b part-3
+echo "BROWN FOX" > part3.txt
+git add part3.txt
+git commit -m "Add part3 fragment"
+git push -u origin part-3
+5.	Merge parts into main:
+git checkout main
+git merge --no-ff part-1 -m "Merge part-1"
+git merge --no-ff part-2 -m "Merge part-2"
+git merge --no-ff part-3 -m "Merge part-3"
+6.	Create the final secret_message.txt by concatenating in the correct order:
+# simple concat (ensure order is part1, part2, part3)
+cat part1.txt part2.txt part3.txt > secret_message.txt
+# trim extra spaces if you want in one line
+tr -d '\n' < secret_message.txt > tmp && mv tmp secret_message.txt
+# or manual edit secret_message.txt to create final
+git add secret_message.txt
+git commit -m "Assemble final secret_message.txt"
+git push origin main
+Alternative: merge strategy where the final file is built during merging
+If you want the main merge to automatically contain the assembled message, you can:
+•	Have each branch add a fragment.txt in a fragments/ folder.
+•	After merging, run a small script to produce secret_message.txt (this is the same concatenation step but done as a post-merge step).
+Handling conflicts
+If two branches modify the same file (e.g., secret.txt) differently, you will get a merge conflict. Resolve manually:
+# after git merge shows conflict
+# open file, resolve, then:
+git add resolved-file
+git commit
+
