@@ -1,0 +1,910 @@
+ 
+1. Write code for a simple user registration form for an event. 
+ 
+ <!DOCTYPE> 
+ 
+<!NOTE^-caret ^ It Is Used To Know The Pattern That It Should Be Right And []-Square 
+Brackets Means Should Not Match The Inside Characters ^HiHello Should Start With HiHello 
+Only Caret> 
+ <html> 
+ <head> 
+ <title>Event Registration Form</title> 
+ <style> 
+ body{ 
+ font-family: Arial,sans-serif; 
+ margin:0; 
+ display:flex; 
+ justify-content:center; 
+ align-items:center; 
+ height:100vh; 
+ background-color:#f8f9fa; 
+ } 
+ .form-container{ 
+ background-color:#fff; 
+ padding:30px; 
+ border-radius:10px; 
+ box-shadow:0 0 10px rgba(0,0,0,0.1); 
+ width:350px; 
+ } 
+ h1{ 
+ text-align:center; 
+ margin-bottom:20px; 
+ color:#333; 
+ }  
+ .input-box 
+ { 
+ margin-bottom:15px; 
+ } 
+ .input-box input{ 
+ width:100%; 
+ padding:10px; 
+ border:1px solid #ccc; 
+ border-radius:5px; 
+ box-sizing:border-box; 
+ outline:none; 
+ transition:border-color 0.3s ease; 
+ } 
+ .input-box input:focus 
+ { 
+ border-color:#007bff; 
+ } 
+ .input-box label 
+ { 
+ display:block; 
+ margin-bottom:5px; 
+ color:#555; 
+ } 
+ .submit-btn 
+ { 
+ width:100%; 
+ padding:10px; 
+ background-color:#007bff; 
+ color:white; 
+ border:none; 
+ border-radius:5px; 
+ cursor:pointer; 
+ transition:background-color 0.3s ease; 
+ }  
+ .submit-btn:hover 
+ { 
+ background-color:#0056b3; 
+ } 
+ .success-msg 
+ { 
+ display:none; 
+ text-align:center; 
+ color:green; 
+ margin-top:15px; 
+ } 
+ </style>  
+ </head> 
+ <body> 
+ <div class="form-container"> 
+ <form id="regForm"> 
+ <h1>Event Registration</h1> 
+ <div class="input-box"> 
+ <label for="firstName">First Name</label> 
+ <input type="text" id="firstName" name="firstName" required> 
+ </div> 
+ <div class="input-box"> 
+ <label for="lastName">Last Name</label> 
+ <input type="text" id="lastName" name="lastName" required> 
+ </div> 
+ <div class="input-box"> 
+ <label for="email">Email</label> 
+ <input type="email" id="email" name="email" required> 
+ </div> 
+ <div class="input-box"> 
+ <label for="phNo">Phone Number</label> 
+ <input type="text" id="phNo" name="phNo" pattern="\d{10}" title="Phone No Must Be 10 
+Digits Only" required> 
+ </div> 
+ <button type="submit" class="submit-btn"> Register</button> 
+ <div class="success-msg" id="successmsg"> 
+ Thank You For Registering :) 
+ </div> 
+ </form> 
+ </div> 
+ <script> 
+ const form=document.getElementById('regForm'); 
+ const successmsg=document.getElementById('successmsg'); 
+ form.addEventListener('submit',function(event){ 
+ event.preventDefault(); 
+ successmsg.style.display='block'; 
+ form.reset(); 
+ }); 
+ </script> 
+ </body> 
+ </html> 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Output: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+2. Explore Git and Git Hub Commands. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+EXPERIMENT – 3 
+ To Practice Source code management on Git Hub. Experiment with source code 
+written in Exercise 1. 
+ 
+STEPS: 
+Create a New Branch Alternate 
+ 
+ 
+ 
+Then, Switch the Master Branch to the alternate Branch 
+ 
+ 
+Now ,Open the Folder where the Registration Form is available & which is used to edit. Use 
+nano Command in order to open the File. 
+ 
+ 
+Edit the code which is Given Below 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Save the changes using git commit. Now the commit “Extra Field Added” is committed. 
+ 
+ 
+Now, Switch the alternate Branch to the master Branch. 
+ 
+ 
+The Below snippet shows the current Branch which is master 
+ 
+ 
+Now, We are switching to a New Branch ‘main’ using the Below Command. 
+After switching to the main Branch Merge the alternate Branch using the git merge 
+branch_name. 
+ 
+ 
+ 
+ 
+ 
+ 
+Use the Push command inorder to add the Branch to the  GitHub. 
+ 
+ 
+The Below Image shows the Exp2 Extra Field Added As Alternate Phone Number. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Now we are in the main Branch which is Denoted with * Symbol. 
+We use git Branch command inorder to view all the Branches. 
+Also Use the git switch branch_name inorder to change the Branch Name. 
+We switch to the alternate Branch inorder to change the Title. 
+ 
+ 
+Open the File Of The Registration Form and Do The Edit which is shown Below. 
+ 
+ 
+ 
+Now switch to the main Branch using git checkout -b main and merge the alternate Branch 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Now push the main Branch using the Given Command as shown Below. 
+ 
+ 
+Finally We have changed the Title Of The Page. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+4. Jenkins installation and setup, explore the environment. 
+ 
+How To Install Jenkins In Windows? 
+ 
+Steps: 
+1. Go To The Browser And Type Jenkins 2.47 Install For Windows 
+2. Click On Download And Deploy 
+3.  In That Page Select Download Jenkins 2.474 for: Windows After That A Thanking 
+Page Will Be Opened 
+4. Now jenkins.msi will be Downloaded 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Copy The Password from the above location 
+ 
+ 
+Select Install Selected Plugins 
+ 
+Give Your Personal Information and select save and continue 
+ 
+ 
+After giving the Personal Information Details Jenkins URL Will Be Displayed On The 
+Screen. Click on Save and Finish 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Finally Jenkins is ready! 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+5. Demonstrate continuous integration and development using Jenkins. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Note Add The Path Of The Git In the Git Section  
+ 
+ 
+ 
+ 
+ 
+To schedule a job to run every 2 hours in Jenkins, you would use: 
+ 
+This means the job will run at a random minute (H) every 2 hours (*/2). 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+6. Explore Docker commands for content management. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+7. Develop a simple containerized application using Docker. 
+ 
+ 
+ 
+# Use the official Nginx image from Docker Hub 
+FROM nginx:latest 
+ 
+# Copy the HTML file into the Nginx container 
+COPY EventRegistrationForm.html /usr/share/nginx/html/index.html 
+ 
+# Expose port 8082 
+EXPOSE 8082 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+8. Integrate Kubernetes and Docker. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+9. Automate the process of running containerized application in exercise 7 using 
+Kubernetes. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Experiment 10: Install and Explore Selenium for Automated Testing. 
+Install NetBeans IDE 21 and JDK 17 
+Install Jar Files From The Selenium Downloads 
+ 
+ 
+Unzip Into Your Working Directory 
+ 
+ 
+Open NetBeans Go to the File>New Project 
+ 
+’ 
+Give The File Name & Click On Finish. 
+ 
+ 
+ 
+ 
+Right Click on the Libraries And Click on Add JAR/Folder 
+ 
+ 
+Add all the Jar Files Of Selenium By Pressing CTRL+A 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+FirstSeleniumPro1.java 
+ 
+import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.edge.EdgeDriver; 
+ 
+public class FirstSeleniumPro { 
+public static void main(String[] args) { 
+// Set the path to the ChromeDriver executable 
+// System.setProperty("webdriver.chrome.driver",  
+"D:\\DEVOPS LAB\\WebDrivers\\msgedgedriver.exe"); 
+// Initialize ChromeDriver 
+WebDriver driver = new EdgeDriver(); 
+ 
+ 
+try { 
+// Open a website 
+driver.get("https://www.google.com"); 
+ 
+// Print the title of the page 
+System.out.println("Title: " + driver.getTitle()); 
+ 
+// Wait for 60 seconds 
+Thread.sleep(60000); 
+} catch (Exception e) { 
+System.out.println("Error: " + e.getMessage()); 
+} finally { 
+// Close the browser 
+driver.quit(); 
+} 
+} 
+} 
+ 
+ 
+ 
+import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.edge.EdgeDriver; 
+ 
+public class FirstSeleniumPro1 { 
+public static void main(String[] args) { 
+// Set the path to the ChromeDriver executable 
+//System.setProperty("webdriver.chrome.driver", 
+ "D:\\DEVOPS LAB\\WebDrivers\\msgedgedriver.exe"); 
+// Initialize ChromeDriver 
+WebDriver driver = new EdgeDriver(); 
+ 
+ 
+try { 
+// Open a website 
+driver.get("D:\\DEVOPS LAB\\EventRegistrationForm.html"); 
+// Print the title of the page 
+System.out.println("Title: " + driver.getTitle()); 
+ 
+// Wait for 60 seconds 
+Thread.sleep(60000); 
+} catch (Exception e) { 
+System.out.println("Error: " + e.getMessage()); 
+} finally { 
+// Close the browser 
+driver.quit(); 
+} 
+} 
+} 
+ 
+ 
+ 
+EXPERIMENT 11: Write a simple program in JavaScript and perform testing using 
+Selenium 
+ 
+ 
+JavaScriptCalculator.html 
+<!DOCTYPE html> 
+<html> 
+<head> 
+<title>Simple Calculator</title> 
+<style> 
+body { 
+font-family: Arial, sans-serif; 
+background-color: #f4f4f4; 
+display: flex; 
+justify-content: center; 
+align-items: center; 
+height: 100vh; 
+margin: 0; 
+} 
+.calculator { 
+background-color: #fff; 
+padding: 20px; 
+border-radius: 10px; 
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+} 
+.calculator input[type="text"] { 
+width: 100%; 
+height: 50px; 
+font-size: 1.2em; 
+text-align: right; 
+margin-bottom: 10px; 
+border: none; 
+border-radius: 5px; 
+box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1); 
+padding-right: 10px; 
+} 
+.calculator button { 
+width: 22%; 
+height: 50px; 
+font-size: 1.2em; 
+margin: 2px; 
+border: none; 
+border-radius: 5px; 
+background-color: #f2f2f2; 
+cursor: pointer; 
+transition: background-color 0.2s; 
+} 
+.calculator button:hover { 
+background-color: #ddd; 
+} 
+.calculator button.operator { 
+background-color: #d4edda; 
+} 
+.calculator button.operator:hover { 
+background-color: #c3e6cb; 
+} 
+.calculator button.equals { 
+background-color: #76c7c0; 
+width: 48%; 
+color: #fff; 
+} 
+.calculator button.equals:hover { 
+background-color: #63b0b8; 
+} 
+.calculator button.zero { 
+width: 48%; 
+} 
+</style> 
+</head> 
+<body> 
+<div class="calculator"> 
+<input type="text" id="display" readonly> 
+<br> 
+<button onclick="clearDisplay()">C</button> 
+<button onclick="deleteLast()">←</button> 
+<button class="operator" onclick="appendToDisplay('/')">/</button> 
+<button class="operator" onclick="appendToDisplay('*')">*</button> 
+<br> 
+<button onclick="appendToDisplay('7')">7</button> 
+<button onclick="appendToDisplay('8')">8</button> 
+<button onclick="appendToDisplay('9')">9</button> 
+<button class="operator" onclick="appendToDisplay('-')">-</button> 
+<br> 
+<button onclick="appendToDisplay('4')">4</button> 
+<button onclick="appendToDisplay('5')">5</button> 
+<button onclick="appendToDisplay('6')">6</button> 
+<button class="operator" onclick="appendToDisplay('+')">+</button> 
+<br> 
+<button onclick="appendToDisplay('1')">1</button> 
+<button onclick="appendToDisplay('2')">2</button> 
+<button onclick="appendToDisplay('3')">3</button> 
+<button class="equals" onclick="calculateResult()">=</button
+<br> 
+<button class="zero" onclick="appendToDisplay('0')">0</button> 
+<button onclick="appendToDisplay('.')">.</button> 
+</div> 
+ 
+ 
+<script> 
+function clearDisplay() { 
+document.getElementById('display').value = ''; 
+} 
+ 
+ 
+function deleteLast() { 
+var display = document.getElementById('display').value; 
+document.getElementById('display').value = display.substring(0, display.length - 1); 
+} 
+ 
+ 
+function appendToDisplay(value) { 
+document.getElementById('display').value += value; 
+} 
+ 
+ 
+function calculateResult() { 
+var display = document.getElementById('display').value; 
+try { 
+document.getElementById('display').value = eval(display); 
+} catch (e) { 
+document.getElementById('display').value = 'Error'; 
+} 
+} 
+</script> 
+</body> 
+</html> 
+Java Code 
+import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.edge.EdgeDriver; 
+ 
+public class FirstSeleniumPro { 
+public static void main(String[] args) { 
+// Set the path to the ChromeDriver executable 
+//System.setProperty("webdriver.chrome.driver", "D:\\DEVOPS 
+LAB\\WebDrivers\\msgedgedriver.exe"); 
+ 
+ 
+// Initialize ChromeDriver 
+WebDriver driver = new EdgeDriver(); 
+ 
+ 
+try { 
+// Open a website 
+driver.get("D:\\DEVOPS LAB\\JavaScriptCalculator.html"); 
+ 
+ 
+// Print the title of the page 
+System.out.println("Title: " + driver.getTitle()); 
+ 
+// Wait for 60 seconds 
+Thread.sleep(60000); 
+} catch (Exception e) { 
+System.out.println("Error: " + e.getMessage()); 
+} finally { 
+// Close the browser 
+driver.quit(); 
+} 
+} 
+} 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+12. Develop test cases for the above containerized application using Selenium. 
+ 
+ 
+After pull command you need to run 
+Pull cmd->docker pull selenium/standalone-chrome 
+ 
+ 
+In the above my-web-app is created using the Following commands: 
+ 
+Dockerfile 
+# Use a base image with a web server (e.g., Nginx) to serve your application 
+FROM nginx:alpine 
+ 
+# Copy your application files (HTML, CSS, JS) to the appropriate directory in the container 
+COPY . /usr/share/nginx/html 
+ 
+# Expose port 8082 to access the web app 
+EXPOSE 8082 
+ 
+# Default command to run when the container starts 
+CMD ["nginx", "-g", "daemon off;"]  
+ 
+In Windows PowerShell Execute The Below Commands: 
+docker build -t my-web-app . 
+docker run -p 8082:80 my-web-app 
+ 
+Using the Below Command Find Your IP ADDRESS 
+ 
+Wireless LAN adapter Wi-Fi: 
+IPv4 Address. . . . . . . . . 
+ 
+Check Whether Your Selenium Grid Is Working Correctly Or Not 
+https://localhost:4444/ui/ 
+ 
+Download msedgedriver.exe Make Sure That Your Version Should Match Through Microsoft 
+Edge Setting You can Know Your Version And Download Form The Below Link 
+Microsoft Edge WebDriver | Microsoft Edge Developer 
+ 
+Your Working Directory Should Be As Given Below: 
+ 
+ 
+SampleScript2.py 
+import time 
+from selenium import webdriver 
+from selenium.webdriver.edge.service import Service 
+from selenium.webdriver.common.by import By 
+from selenium.webdriver.support.ui import WebDriverWait 
+from selenium.webdriver.support import expected_conditions as EC 
+ 
+print("Test Execution Started") 
+ 
+# Set Edge options 
+options = webdriver.EdgeOptions() 
+options.add_argument('--ignore-ssl-errors=yes') 
+options.add_argument('--ignore-certificate-errors') 
+options.add_argument('--no-sandbox') 
+options.add_argument('--disable-dev-shm-usage') 
+options.add_argument('--start-maximized')  # Start with a maximized window 
+# Remove the headless option if it is set. 
+# options.add_argument('--headless')  # This line should be commented out or removed. 
+ 
+# Provide the path to msedgedriver.exe (since it's in the same directory as the script) 
+driver_path = "D:\\DEVOPS LAB\\Exp 12\\msedgedriver.exe"  # Update the path if necessary 
+ 
+# Initialize Edge WebDriver using the path to the driver 
+driver = webdriver.Edge(service=Service(driver_path), options=options) 
+ 
+# Maximize the browser window 
+driver.maximize_window() 
+ 
+# Navigate to the registration page served by the Docker container 
+driver.get("http://localhost:8082/EventRegistrationForm.html")  # Correct IP 
+print("Navigating to the form...") 
+ 
+# Wait for the form to load (change the ID as per your page structure) 
+WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "firstName"))) 
+ 
+# Fill the registration form using correct element IDs 
+driver.find_element(By.ID, "firstName").send_keys("testuser") 
+time.sleep(1)  # Introduce a 1-second delay to visually observe the filling of the field 
+driver.find_element(By.ID, "lastName").send_keys("Test") 
+time.sleep(1)  # Introduce a 1-second delay 
+driver.find_element(By.ID, "email").send_keys("testuser@example.com") 
+time.sleep(1)  # Introduce a 1-second delay 
+driver.find_element(By.ID, "phNo").send_keys("1234567890") 
+time.sleep(1)  # Introduce a 1-second delay 
+ 
+# Submit the form 
+driver.find_element(By.XPATH, "//button[@type='submit']").click() 
+ 
+# Wait for confirmation message to appear 
+WebDriverWait(driver, 10).until(EC.text_to_be_present_in_element((By.TAG_NAME, "body"), "Thank 
+You For Registering :)")) 
+ 
+# Check if registration was successful 
+confirmation_message = driver.page_source 
+if "Thank You For Registering :)" in confirmation_message: 
+    print("Test Passed!") 
+else: 
+    print("Test Failed!") 
+ 
+# Close the browser and quit the session 
+driver.close() 
+driver.quit() 
+ 
+print("Test Execution Completed Successfully!") 
+ 
+ 
+ 
